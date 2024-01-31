@@ -47,7 +47,10 @@ export function LoginForm() {
             if (e instanceof AxiosError) {
                 const originalMsg = e.response?.data.message
                 console.log(e);
-                if ('message' in originalMsg) return form.setError(originalMsg?.field, { message: originalMsg.message })
+                if ('message' in originalMsg) {
+                    form.setError(originalMsg?.field, { message: originalMsg.message })
+                    form.setFocus(originalMsg?.field)
+                }
             } else if (e instanceof Error) {
                 setError(e.message)
             } else {

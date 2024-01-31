@@ -36,7 +36,7 @@ export function CustomAlertDialog({ trigger, description, title, showDiscard, di
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     {showDiscard && <AlertDialogCancel>{discardLabel}</AlertDialogCancel>}
-                    <AlertDialogAction onClick={() => actionHandleFn()} disabled={actionLoading}>
+                    <AlertDialogAction onClick={() => actionHandleFn()} disabled={actionLoading} asChild>
                         {
                             <LoadingButton loading={actionLoading || false}>{actionLabel}</LoadingButton>
                         }

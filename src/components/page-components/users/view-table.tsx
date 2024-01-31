@@ -1,7 +1,7 @@
 import { DataTable } from "@/lib/data-table";
 import { UsersTableColumns } from "./columns";
 import { useQuery } from "@tanstack/react-query";
-import { fetchUsers } from "@/lib/fetch-queries";
+import { fetchUsers } from "@/lib/queryFns";
 
 export default function UsersViewTable() {
 

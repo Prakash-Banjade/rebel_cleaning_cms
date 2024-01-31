@@ -81,3 +81,14 @@
     background-color: hsl(216, 24%, 96%);
   }
 }
+
+.jodit-ui-button.jodit-ui-button_size_middle.jodit-ui-button_variant_primary {
+  background-color: hsl(242, 60%, 69%) !important;
+}
+/* .jodit.jodit-popup-container.jodit-box.jodit_theme_default {
+  background-color: red !important;
+} */
+
+.jodit-react-container {
+  margin-top: 0 !important;
+}

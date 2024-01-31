@@ -10,6 +10,7 @@ import React from "react";
 
 interface DropDownItem {
     element: React.ReactNode;
+    type?: 'dialog' | 'link' | 'button';
 }
 
 interface Props {
@@ -22,7 +23,7 @@ export default function CustomDropDown({ trigger, menuItems, header }: Props) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild={typeof trigger !== 'string'}>{trigger}</DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent side="left" align="start">
                 {
                     header && <>
                         <DropdownMenuLabel>{header}</DropdownMenuLabel>
@@ -32,7 +33,8 @@ export default function CustomDropDown({ trigger, menuItems, header }: Props) {
 
                 {
                     menuItems.map((item, index) => (
-                        <DropdownMenuItem key={index}>{item.element}</DropdownMenuItem>
+                        item.type === 'dialog' ? <div key={index}>{item.element}</div> :
+                            <DropdownMenuItem key={index} role="button" className="hover:bg-slate-100">{item.element}</DropdownMenuItem>
                     ))
                 }
             </DropdownMenuContent>

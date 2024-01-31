@@ -2,6 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import { useAuth } from "@/context/AuthContext";
+import { Breadcrumbs } from "@/lib/breadcrumbs";
 
 export default function Layout() {
 
@@ -14,6 +15,9 @@ export default function Layout() {
             </section>
             <section className="max-h-full overflow-auto grow p-4">
                 <Header />
+                <div className="my-4 bg-white border px-5 py-3 rounded-md">
+                    <Breadcrumbs />
+                </div>
                 <Outlet />
             </section>
         </div>

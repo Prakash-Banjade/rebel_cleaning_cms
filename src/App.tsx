@@ -6,14 +6,29 @@ import UsersPage from "./pages/cms/users/users.index"
 import ServicesPage from "./pages/cms/services/services.index"
 import BlogsPage from "./pages/cms/blogs/blogs.index"
 import GalleryPage from "./pages/cms/gallery/gallery.index"
+import AddService from "./pages/cms/services/add-service"
+import SingleServiceView from "./pages/cms/services/single-service-view"
+import EditService from "./pages/cms/services/edit-service"
+import SingleBlogView from "./pages/cms/blogs/single-blog-view"
 
 
 const routes = [
   { path: '/dashboard', element: <h1>Dashboard</h1> },
   { path: '/users', element: <UsersPage /> },
+  { path: '/users/new', element: <h1>Add new user</h1> },
+
   { path: '/services', element: <ServicesPage /> },
+  { path: '/services/new', element: <AddService /> },
+  { path: '/services/:id', element: <SingleServiceView /> },
+  { path: '/services/:id/edit', element: <EditService /> },
+
   { path: '/blogs', element: <BlogsPage /> },
+  { path: '/blogs/new', element: <h1>Add new blog</h1> },
+  { path: '/blogs/:id', element: <SingleBlogView /> },
+
   { path: '/gallery', element: <GalleryPage /> },
+  { path: '/gallery/new', element: <h1>Add new gallery</h1> },
+  { path: '/gallery/:id', element: <h1>This is single gallery</h1> },
 ]
 
 function App() {
