@@ -15,7 +15,7 @@ export default function SingleServiceView() {
         <article className="bg-white mt-3 p-4 border rounded-md prose lg:prose-lg min-w-full flex flex-col gap-12">
             <section>
                 <p className="font-medium text-sm text-gray-600">Title</p>
-                <h1 className="font-medium text-2xl">{data?.title}</h1>
+                <h1 className="font-medium text-2xl !mb-0">{data?.title}</h1>
             </section>
 
             <section>

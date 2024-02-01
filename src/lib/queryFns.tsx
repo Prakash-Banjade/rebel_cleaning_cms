@@ -40,5 +40,20 @@ export const getBlogById = async (id: string) => {
     return res.data;
 }
 
+export const fetchGallerys = async () => {
+    const res = await axiosInstance.get('/gallery');
+    return res.data;
+}
+
+export const deleteGallery = async (id: string) => {
+    const res = await axiosInstance.delete(`/gallery/${id}`);
+    return res.data;
+}
+
+export const getGalleryById = async (id: string) => {
+    const res = await axiosInstance.get(`/gallery/${id}`);
+    return res.data;
+}
+
 
 

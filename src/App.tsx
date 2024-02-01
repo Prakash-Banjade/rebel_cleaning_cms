@@ -12,6 +12,9 @@ import EditService from "./pages/cms/services/edit-service"
 import SingleBlogView from "./pages/cms/blogs/single-blog-view"
 import AddBlog from "./pages/cms/blogs/add-blog"
 import EditBlog from "./pages/cms/blogs/edit-blog"
+import AddGallery from "./pages/cms/gallery/add-gallery"
+import EditGallery from "./pages/cms/gallery/edit-gallery"
+import ViewSingleGallery from "./pages/cms/gallery/single-view"
 
 
 const routes = [
@@ -30,8 +33,9 @@ const routes = [
   { path: '/blogs/:id/edit', element: <EditBlog /> },
 
   { path: '/gallery', element: <GalleryPage /> },
-  { path: '/gallery/new', element: <h1>Add new gallery</h1> },
-  { path: '/gallery/:id', element: <h1>This is single gallery</h1> },
+  { path: '/gallery/new', element: <AddGallery /> },
+  { path: '/gallery/:id', element: <ViewSingleGallery /> },
+  { path: '/gallery/:id/edit', element: <EditGallery /> },
 ]
 
 function App() {
