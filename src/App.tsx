@@ -10,6 +10,8 @@ import AddService from "./pages/cms/services/add-service"
 import SingleServiceView from "./pages/cms/services/single-service-view"
 import EditService from "./pages/cms/services/edit-service"
 import SingleBlogView from "./pages/cms/blogs/single-blog-view"
+import AddBlog from "./pages/cms/blogs/add-blog"
+import EditBlog from "./pages/cms/blogs/edit-blog"
 
 
 const routes = [
@@ -23,8 +25,9 @@ const routes = [
   { path: '/services/:id/edit', element: <EditService /> },
 
   { path: '/blogs', element: <BlogsPage /> },
-  { path: '/blogs/new', element: <h1>Add new blog</h1> },
+  { path: '/blogs/new', element: <AddBlog /> },
   { path: '/blogs/:id', element: <SingleBlogView /> },
+  { path: '/blogs/:id/edit', element: <EditBlog /> },
 
   { path: '/gallery', element: <GalleryPage /> },
   { path: '/gallery/new', element: <h1>Add new gallery</h1> },

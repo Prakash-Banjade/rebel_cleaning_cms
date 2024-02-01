@@ -11,7 +11,7 @@ export default function BlogsPage() {
     })
 
     return (
-        <EntityWrapper title="Blogs" description="All blogs ">
+        <EntityWrapper title="Blogs" description="All blogs" addBtnUrl="new">
             <ViewAllBlogs blogs={data} />
         </EntityWrapper>
     )

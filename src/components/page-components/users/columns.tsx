@@ -9,12 +9,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { CustomAlertDialog } from "@/lib/CustomAlertDialog"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { deleteUser } from "@/lib/queryFns"
-
-export type User = {
-    id: string,
-    email: string,
-    createdAt: string,
-}
+import { User } from "@/models/user.model"
 
 export const UsersTableColumns: ColumnDef<User>[] = [
     {
@@ -38,12 +33,16 @@ export const UsersTableColumns: ColumnDef<User>[] = [
         )
     },
     {
-        accessorKey: "email",
-        header: "Email",
+        accessorKey: "name",
+        header: "Name",
         cell: ({ row }) => {
             const user = row.original;
-            return <span className="font-medium">{user.email}</span>
+            return <span className="font-medium">{user.name}</span>
         }
+    },
+    {
+        accessorKey: "email",
+        header: "Email",
     },
     {
         accessorKey: "createdAt",
@@ -84,7 +83,8 @@ export const UsersTableColumns: ColumnDef<User>[] = [
                             type: 'button',
                             element: <span onClick={() => {
                                 navigate(`edit/${student.id}`)
-                            }} className="text-blue-600 flex items-center gap-x-2"><FiEdit />
+                            }} className="flex items-center gap-x-2">
+                                <span className="text-blue-600"><FiEdit /></span>
                                 Edit details
                             </span>
                         },
