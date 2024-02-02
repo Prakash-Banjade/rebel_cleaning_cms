@@ -9,7 +9,6 @@ export default function SingleServiceView() {
         queryKey: ['service', id],
         queryFn: () => getServiceById(id as string)
     })
-    console.log(data);
 
     return (
         <article className="bg-white mt-3 p-4 border rounded-md prose lg:prose-lg min-w-full flex flex-col gap-12">

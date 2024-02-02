@@ -15,6 +15,8 @@ import EditBlog from "./pages/cms/blogs/edit-blog"
 import AddGallery from "./pages/cms/gallery/add-gallery"
 import EditGallery from "./pages/cms/gallery/edit-gallery"
 import ViewSingleGallery from "./pages/cms/gallery/single-view"
+import ContactPage from "./pages/cms/contact/contacts.index"
+import ContactForm from "./pages/cms/contact/contact-form"
 
 
 const routes = [
@@ -36,6 +38,9 @@ const routes = [
   { path: '/gallery/new', element: <AddGallery /> },
   { path: '/gallery/:id', element: <ViewSingleGallery /> },
   { path: '/gallery/:id/edit', element: <EditGallery /> },
+
+  { path: '/contact', element: <ContactPage /> },
+  { path: '/contact/form', element: <ContactForm /> },
 ]
 
 function App() {

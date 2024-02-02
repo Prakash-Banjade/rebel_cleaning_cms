@@ -1,4 +1,5 @@
 import axiosInstance from "@/config/axios"
+import { ContactArraySchema, ContactArrayType } from "@/models/contact.model";
 
 export const fetchUsers = async () => {
     const res = await axiosInstance.get('/users');
@@ -55,5 +56,19 @@ export const getGalleryById = async (id: string) => {
     return res.data;
 }
 
+export async function getContact(): Promise<ContactArrayType | undefined> {
+    try {
+        const res = await axiosInstance.get(`/contact`);
+        const data: ContactArrayType = res.data;
 
+        const parsedData = ContactArraySchema.parse(data);
+        return parsedData;
+    } catch (e) {
+        if (e instanceof Error) console.log(e.stack);
+    }
+}
 
+export const updateContact = async (id: string) => {
+    const res = await axiosInstance.post(`/contact/${id}`);
+    return res.data;
+}

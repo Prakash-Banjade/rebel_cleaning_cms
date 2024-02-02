@@ -3,7 +3,7 @@ import { BiSolidDashboard } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
 import { FaServicestack } from "react-icons/fa";
 import { LiaBlogSolid } from "react-icons/lia";
-import { RiGalleryFill } from "react-icons/ri";
+import { RiContactsBookLine, RiGalleryFill } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 
 const navItems = [
@@ -31,6 +31,11 @@ const navItems = [
         label: 'Gallery',
         icon: RiGalleryFill,
         href: '/gallery',
+    },
+    {
+        label: 'Contact',
+        icon: RiContactsBookLine,
+        href: '/contact',
     },
 ]
 
