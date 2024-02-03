@@ -146,7 +146,10 @@ export default function ContactForm() {
                     }
 
                     <div className="flex gap-4 justify-end">
-                        <Button variant="outline" type="reset" onClick={() => form.reset()}>Cancel</Button>
+                        <Button variant="outline" type="reset" onClick={() => {
+                            form.reset()
+                            navigate(-1)
+                        }}>Cancel</Button>
                         <LoadingButton loading={form.formState.isSubmitting} type="submit" disabled={form.formState.isSubmitting} variant="brand">Save Contact</LoadingButton>
                     </div>
                 </form>

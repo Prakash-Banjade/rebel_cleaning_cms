@@ -106,7 +106,10 @@ export default function EditServiceForm({ service }: Props) {
                 </section>
 
                 <div className="flex gap-4 justify-end">
-                    <Button variant="outline" type="reset" onClick={() => navigate(-1)}>Cancel</Button>
+                    <Button variant="outline" type="reset" onClick={() => {
+                        form.reset()
+                        navigate(-1)
+                    }}>Cancel</Button>
                     <LoadingButton loading={loading} type="submit" variant="brand">Save changes</LoadingButton>
                 </div>
             </form>
