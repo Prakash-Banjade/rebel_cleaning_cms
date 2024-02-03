@@ -1,7 +1,11 @@
 import { LoginForm } from "@/components/page-components/login/login-form";
+import { useAuth } from "@/context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 export default function LoginPage() {
-    return (
+    const { accessToken } = useAuth()
+
+    return !accessToken ?
         <div className="grid place-items-center min-h-[100dvh] bg-[url('/sofa.webp')] bg-cover bg-no-repeat">
             <div className="w-[600px] px-20 py-12 rounded-md border shadow-sm bg-white">
                 <div className="flex flex-col items-center justify-center mb-12 prose lg:prose-lg">
@@ -10,6 +14,5 @@ export default function LoginPage() {
                 </div>
                 <LoginForm />
             </div>
-        </div>
-    )
+        </div> : <Navigate to="/dashboard" replace />
 }
