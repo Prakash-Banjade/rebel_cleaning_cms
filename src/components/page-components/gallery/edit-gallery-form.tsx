@@ -20,6 +20,7 @@ import { toast } from "@/components/ui/use-toast"
 import { useNavigate } from "react-router-dom"
 import { Gallery, GalleryFormSchemaType, galleryFormSchema } from "@/models/gallery.model"
 import MasonryGrid from "@/lib/masonry-grid"
+import FormImage from "../../../lib/form-image"
 
 
 export default function EditGalleryForm({ gallery }: { gallery: Gallery }) {
@@ -92,7 +93,7 @@ export default function EditGalleryForm({ gallery }: { gallery: Gallery }) {
                         </FormItem>
                     )}
                 />
-                <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3">
                     <FormLabel htmlFor="coverImage">Cover Image</FormLabel>
                     <Input id="coverImage" type="file" accept="image/jpeg, image/png, image/webp" multiple onChange={e => e.target.files && form.setValue('images', [...form.getValues('images'), ...e.target.files])} />
                     <FormDescription>Select images to add to gallery. You can select multiple images too.</FormDescription>
@@ -106,10 +107,7 @@ export default function EditGalleryForm({ gallery }: { gallery: Gallery }) {
                 <MasonryGrid>
                     {
                         prevImages?.map((image, index) => (
-                            <div className="relative overflow-hidden rounded-md group cursor-pointer" role="button" title="Click to remove" key={index} onClick={() => handleRemovePrevImages(image)}>
-                                <img src={`${import.meta.env.VITE_REACT_APP_API_URL}/${image}`} loading="lazy" alt="galleryImage" className="rounded-md shadow-md" />
-                                <div className="bg-black/40 transition-all absolute inset-0 opacity-0 group-hover:opacity-100"></div>
-                            </div>
+                            <FormImage key={index} src={`${import.meta.env.VITE_REACT_APP_API_URL}/${image}`} removeFn={() => handleRemovePrevImages(image)} />
                         ))
                     }
                     {form.watch('images') && (

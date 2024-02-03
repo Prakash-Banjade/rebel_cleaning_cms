@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button"
 import { Editor } from "@/lib/jodit-editor"
 import { toast } from "@/components/ui/use-toast"
 import { useNavigate } from "react-router-dom"
+import FormImage from "@/lib/form-image"
 
 interface Props {
     service: {
@@ -32,8 +33,8 @@ interface Props {
 }
 
 export default function EditServiceForm({ service }: Props) {
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [serviceImage, setServiceImage] = useState(service.coverImage)
     const navigate = useNavigate()
 
     const form = useForm<ServiceFormSchemaType>({
@@ -46,7 +47,6 @@ export default function EditServiceForm({ service }: Props) {
     })
 
     async function onSubmit(values: ServiceFormSchemaType) {
-        setLoading(true)
         try {
             const formData = new FormData();
             formData.append('title', values.title);
@@ -67,8 +67,6 @@ export default function EditServiceForm({ service }: Props) {
         } catch (e) {
             console.log(e);
             setError(`${e}`)
-        } finally {
-            setLoading(false)
         }
     }
 
@@ -99,7 +97,18 @@ export default function EditServiceForm({ service }: Props) {
                     <Input id="coverImage" type="file" accept="image/*" onChange={e => e.target.files && form.setValue('coverImage', e.target.files[0])} />
                 </div>
 
-                {(form.watch('coverImage') || service?.coverImage) && <img src={(form.getValues('coverImage') instanceof File && URL.createObjectURL(form.getValues('coverImage')!)) || `${import.meta.env.VITE_REACT_APP_API_URL}/${service.coverImage}`} alt="cover_image" className="w-full max-w-[600px] aspect-auto rounded-md shadow-md" />}
+                {(form.watch('coverImage') || serviceImage) && (
+                    <FormImage
+                        src={(form.getValues('coverImage') instanceof File && URL.createObjectURL(form.getValues('coverImage')!)) || `${import.meta.env.VITE_REACT_APP_API_URL}/${serviceImage}`}
+                        alt="cover_image"
+                        imageClassName="w-full max-w-[600px] aspect-auto rounded-md shadow-md"
+                        removeFn={() => {
+                            form.setValue('coverImage', undefined)
+                            setServiceImage('')
+                        }}
+                    />
+                )}
+
                 <section className="mt-8 flex flex-col gap-3">
                     <FormLabel>Content</FormLabel>
                     <Editor content={form.getValues('content')} placeholder={'Write service description here'} setContent={(content: string) => form.setValue('content', content)} />
@@ -110,7 +119,7 @@ export default function EditServiceForm({ service }: Props) {
                         form.reset()
                         navigate(-1)
                     }}>Cancel</Button>
-                    <LoadingButton loading={loading} type="submit" variant="brand">Save changes</LoadingButton>
+                    <LoadingButton loading={form.formState.isSubmitting} type="submit" variant="brand">Save changes</LoadingButton>
                 </div>
             </form>
         </Form>

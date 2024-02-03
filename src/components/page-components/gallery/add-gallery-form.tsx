@@ -20,11 +20,11 @@ import { toast } from "@/components/ui/use-toast"
 import { useNavigate } from "react-router-dom"
 import { GalleryFormSchemaType, galleryFormSchema } from "@/models/gallery.model"
 import MasonryGrid from "@/lib/masonry-grid"
+import FormImage from "../../../lib/form-image";
 
 
 export default function AddNewGalleryForm() {
     const [error, setError] = useState('');
-    // const { toast } = useToast()
     const navigate = useNavigate()
 
     const form = useForm<GalleryFormSchemaType>({
@@ -96,14 +96,10 @@ export default function AddNewGalleryForm() {
                 <MasonryGrid>
                     {form.watch('images') && (
                         form.getValues('images').map((image, index) => (
-                            <div className="relative overflow-hidden rounded-md group cursor-pointer" role="button" title="Click to remove" key={index} onClick={() => handleSelectedImages(index)}>
-                                <img src={URL.createObjectURL(image!)} key={index} loading="lazy" alt="galleryImage" className="rounded-md shadow-md" />
-                                <div className="bg-black/40 transition-all absolute inset-0 opacity-0 group-hover:opacity-100"></div>
-                            </div>
+                            <FormImage key={index} src={URL.createObjectURL(image!)} removeFn={() => handleSelectedImages(index)} />
                         ))
                     )}
                 </MasonryGrid>
-
 
                 <div className="flex gap-4 justify-end">
                     <Button variant="outline" type="reset" onClick={() => {

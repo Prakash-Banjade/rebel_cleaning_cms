@@ -22,7 +22,6 @@ import { useNavigate } from "react-router-dom"
 import cookie from 'js-cookie'
 
 export function LoginForm() {
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const { setAccessToken } = useAuth();
     const navigate = useNavigate();
@@ -36,7 +35,6 @@ export function LoginForm() {
     })
 
     async function onSubmit(values: FormSchemaType) {
-        setLoading(true)
         try {
             const res = await axiosInstance.post('/auth/login', values);
             if (!res.data?.access_token) throw new Error('Something went wrong. Please try again!')
@@ -56,8 +54,6 @@ export function LoginForm() {
             } else {
                 setError(`${e}`)
             }
-        } finally {
-            setLoading(false)
         }
     }
 
@@ -99,7 +95,7 @@ export function LoginForm() {
                         </FormItem>
                     )}
                 />
-                <LoadingButton loading={loading} type="submit" variant="brand" className="w-full">Login</LoadingButton>
+                <LoadingButton loading={form.formState.isSubmitting} type="submit" variant="brand" className="w-full">Login</LoadingButton>
             </form>
         </Form>
     )

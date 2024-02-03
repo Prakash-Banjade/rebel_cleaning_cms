@@ -20,11 +20,12 @@ import { Button } from "@/components/ui/button"
 import { Editor } from "@/lib/jodit-editor"
 import { toast } from "@/components/ui/use-toast"
 import { useNavigate } from "react-router-dom"
+import FormImage from "@/lib/form-image"
 
 
 export default function EditBlogForm({ blog }: { blog: Blog }) {
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [blogImage, setBlogImage] = useState(blog.coverImage)
     const navigate = useNavigate()
 
     const form = useForm<BlogFormSchemaType>({
@@ -37,7 +38,6 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
     })
 
     async function onSubmit(values: BlogFormSchemaType) {
-        setLoading(true)
         try {
             const formData = new FormData();
             formData.append('title', values.title);
@@ -58,8 +58,6 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
         } catch (e) {
             console.log(e);
             setError(`${e}`)
-        } finally {
-            setLoading(false)
         }
     }
 
@@ -90,7 +88,18 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
                     <Input id="coverImage" type="file" accept="image/*" onChange={e => e.target.files && form.setValue('coverImage', e.target.files[0])} />
                 </div>
 
-                {(form.watch('coverImage') || blog?.coverImage) && <img src={(form.getValues('coverImage') instanceof File && URL.createObjectURL(form.getValues('coverImage')!)) || `${import.meta.env.VITE_REACT_APP_API_URL}/${blog.coverImage}`} alt="cover_image" className="w-full max-w-[600px] aspect-auto rounded-md shadow-md" />}
+                {(form.watch('coverImage') || blogImage) && (
+                    <FormImage
+                        src={(form.getValues('coverImage') instanceof File && URL.createObjectURL(form.getValues('coverImage')!)) || `${import.meta.env.VITE_REACT_APP_API_URL}/${blogImage}`}
+                        alt="cover_image"
+                        imageClassName="w-full max-w-[600px] aspect-auto rounded-md shadow-md"
+                        removeFn={() => {
+                            form.setValue('coverImage', undefined)
+                            setBlogImage('')
+                        }}
+                    />
+                )}
+
                 <section className="mt-8 flex flex-col gap-3">
                     <FormLabel>Content</FormLabel>
                     <Editor content={form.getValues('content')} placeholder={'Write blog description here'} setContent={(content: string) => form.setValue('content', content)} />
@@ -101,7 +110,7 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
                         form.reset();
                         navigate(-1)
                     }}>Cancel</Button>
-                    <LoadingButton loading={loading} type="submit" variant="brand">Save changes</LoadingButton>
+                    <LoadingButton loading={form.formState.isSubmitting} type="submit" variant="brand">Save changes</LoadingButton>
                 </div>
             </form>
         </Form>

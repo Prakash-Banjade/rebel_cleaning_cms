@@ -20,11 +20,10 @@ import { Editor } from "@/lib/jodit-editor"
 import { toast } from "@/components/ui/use-toast"
 import { useNavigate } from "react-router-dom"
 import { BlogFormSchemaType, blogFormSchema } from "@/models/blog.model"
+import FormImage from "@/lib/form-image"
 
 export default function AddNewBlogForm() {
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    // const { toast } = useToast()
     const navigate = useNavigate()
 
     const form = useForm<BlogFormSchemaType>({
@@ -37,7 +36,6 @@ export default function AddNewBlogForm() {
     })
 
     async function onSubmit(values: BlogFormSchemaType) {
-        setLoading(true)
         try {
             const formData = new FormData();
             formData.append('title', values.title);
@@ -54,8 +52,6 @@ export default function AddNewBlogForm() {
         } catch (e) {
             console.log(e);
             setError(`${e}`);
-        } finally {
-            setLoading(false)
         }
     }
 
@@ -86,7 +82,14 @@ export default function AddNewBlogForm() {
                     <Input required id="coverImage" type="file" accept="image/*" onChange={e => e.target.files && form.setValue('coverImage', e.target.files[0])} />
                 </div>
 
-                {form.watch('coverImage') && <img src={URL.createObjectURL(form.getValues('coverImage')!)} alt="cover_image" className="w-full max-w-[600px] aspect-auto rounded-md shadow-md" />}
+                {form.watch('coverImage') && (
+                    <FormImage
+                        src={URL.createObjectURL(form.getValues('coverImage')!)}
+                        alt="cover_image"
+                        imageClassName="w-full max-w-[600px] aspect-auto rounded-md shadow-md"
+                        removeFn={() => { form.setValue('coverImage', undefined) }}
+                    />
+                )}
 
                 <section className="mt-8 flex flex-col gap-3">
                     <FormLabel>Content</FormLabel>
@@ -98,7 +101,7 @@ export default function AddNewBlogForm() {
                         form.reset()
                         navigate(-1)
                     }}>Cancel</Button>
-                    <LoadingButton loading={loading} type="submit" variant="brand">Add Blog</LoadingButton>
+                    <LoadingButton loading={form.formState.isSubmitting} type="submit" variant="brand">Add Blog</LoadingButton>
                 </div>
             </form>
         </Form>
