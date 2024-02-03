@@ -1,6 +1,6 @@
 
 import { BiSolidDashboard } from "react-icons/bi";
-import { FaUsers } from "react-icons/fa";
+import { FaQuestion, FaUsers } from "react-icons/fa";
 import { FaServicestack } from "react-icons/fa";
 import { LiaBlogSolid } from "react-icons/lia";
 import { RiContactsBookLine, RiGalleryFill } from "react-icons/ri";
@@ -36,6 +36,11 @@ const navItems = [
         label: 'Contact',
         icon: RiContactsBookLine,
         href: '/contact',
+    },
+    {
+        label: 'FAQs',
+        icon: FaQuestion,
+        href: '/faq',
     },
 ]
 

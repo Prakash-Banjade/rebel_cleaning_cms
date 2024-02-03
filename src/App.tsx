@@ -17,7 +17,7 @@ import EditGallery from "./pages/cms/gallery/edit-gallery"
 import ViewSingleGallery from "./pages/cms/gallery/single-view"
 import ContactPage from "./pages/cms/contact/contacts.index"
 import ContactForm from "./pages/cms/contact/contact-form"
-
+import FaqPage from "./pages/cms/faq/faq.index"
 
 const routes = [
   { path: '/dashboard', element: <h1>Dashboard</h1> },
@@ -41,6 +41,8 @@ const routes = [
 
   { path: '/contact', element: <ContactPage /> },
   { path: '/contact/form', element: <ContactForm /> },
+  
+  { path: '/faq', element: <FaqPage /> },
 ]
 
 function App() {

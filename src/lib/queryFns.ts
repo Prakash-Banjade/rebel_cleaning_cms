@@ -1,5 +1,6 @@
 import axiosInstance from "@/config/axios"
 import { ContactArraySchema, ContactArrayType } from "@/models/contact.model";
+import { Faq, FaqArraySchemaWithBaseModel, FaqArrayWithBaseModel } from "@/models/faq.model";
 
 export const fetchUsers = async () => {
     const res = await axiosInstance.get('/users');
@@ -68,7 +69,28 @@ export async function getContact(): Promise<ContactArrayType | undefined> {
     }
 }
 
-export const updateContact = async (id: string) => {
-    const res = await axiosInstance.post(`/contact/${id}`);
+export async function getFaqs(): Promise<FaqArrayWithBaseModel | undefined> {
+    try {
+        const res = await axiosInstance.get(`/faq`);
+        const data: FaqArrayWithBaseModel = res.data;
+
+        const parsedData = FaqArraySchemaWithBaseModel.parse(data);
+        return parsedData;
+    } catch (e) {
+        if (e instanceof Error) console.log(e.stack);
+    }
+}
+
+export const postFaq = async (data: Faq) => {
+    const res = await axiosInstance.post(`/faq`, data);
+    return res.data;
+}
+
+export const removeFaq = async (id: string) => {
+    const res = await axiosInstance.delete(`/faq/${id}`);
+    return res.data;
+}
+export const updateFaq = async (id: string, data: Faq) => {
+    const res = await axiosInstance.patch(`/faq/${id}`, data);
     return res.data;
 }
