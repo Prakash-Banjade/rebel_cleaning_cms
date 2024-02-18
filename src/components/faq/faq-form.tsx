@@ -27,32 +27,33 @@ export default function FaqForm({ edit, faq, closeModal }: Props) {
         } : faqInitialFormValues,
     })
 
+    function onSuccess() {
+        queryClient.invalidateQueries({ queryKey: ['faqs'] })
+        closeModal && closeModal()
+        form.reset()
+        form.setFocus('question')
+    }
+
     const { mutate: post, error: postErr } = useMutation({
         mutationFn: (values: Faq) => postFaq(values),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['faqs'] })
-            closeModal && closeModal()
-        }
+        onSuccess: onSuccess
     })
     const { mutate: patch, error: patchErr } = useMutation({
         mutationFn: (values: Faq) => updateFaq(faq?.id!, values),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['faqs'] })
-            closeModal && closeModal()
-        }
+        onSuccess: onSuccess
     })
 
     async function onSubmit(values: Faq) {
-        console.log(values);
         try {
             { !edit ? post(values) : patch(values) }
 
             (postErr || patchErr) ? toast({
                 title: 'Error',
                 description: `${postErr?.message} ${patchErr?.message}`,
+                variant: 'destructive'
             }) : toast({
                 title: 'Success',
-                description: `FAQ ${edit ? 'updated' : 'added'} successfully`
+                description: `FAQ ${edit ? 'updated' : 'added'} successfully`,
             })
 
         } catch (e) {
@@ -96,7 +97,7 @@ export default function FaqForm({ edit, faq, closeModal }: Props) {
                         <Button variant="outline" type="reset" onClick={() => {
                             form.reset()
                         }}>Clear</Button>
-                        <LoadingButton loading={form.formState.isSubmitting} type="submit" disabled={form.formState.isSubmitting} variant="brand">{edit ? 'Save changes' : 'Add FAQ'}</LoadingButton>
+                        <LoadingButton loading={form.formState.isSubmitting} type="submit" variant="brand">{edit ? 'Save changes' : 'Add FAQ'}</LoadingButton>
                     </div>
                 </form>
             </Form>

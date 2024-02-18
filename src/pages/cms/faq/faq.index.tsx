@@ -67,6 +67,9 @@ export default function FaqPage() {
                             />
                         ))
                     }
+                    {
+                        data?.length === 0 && <p className="italic text-muted-foreground text-center">** You haven&apos;t added any FAQs yet. **</p>
+                    }
                 </section>
 
                 <FaqForm />

@@ -82,15 +82,27 @@ export async function getFaqs(): Promise<FaqArrayWithBaseModel | undefined> {
 }
 
 export const postFaq = async (data: Faq) => {
-    const res = await axiosInstance.post(`/faq`, data);
-    return res.data;
+    try {
+        const res = await axiosInstance.post(`/faq`, data);
+        return res.data;
+    } catch (e) {
+        if (e instanceof Error) throw new Error(e.message)
+    }
 }
 
 export const removeFaq = async (id: string) => {
-    const res = await axiosInstance.delete(`/faq/${id}`);
-    return res.data;
+    try {
+        const res = await axiosInstance.delete(`/faq/${id}`);
+        return res.data;
+    } catch (e) {
+        if (e instanceof Error) throw new Error(e.message)
+    }
 }
 export const updateFaq = async (id: string, data: Faq) => {
-    const res = await axiosInstance.patch(`/faq/${id}`, data);
-    return res.data;
+    try {
+        const res = await axiosInstance.patch(`/faq/${id}`, data);
+        return res.data;
+    } catch (e) {
+        if (e instanceof Error) throw new Error(e.message)
+    }
 }

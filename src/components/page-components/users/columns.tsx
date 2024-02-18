@@ -85,7 +85,7 @@ export const UsersTableColumns: ColumnDef<User>[] = [
                                 navigate(`edit/${student.id}`)
                             }} className="flex items-center gap-x-2">
                                 <span className="text-blue-600"><FiEdit /></span>
-                                Edit details
+                                Edit
                             </span>
                         },
                         {

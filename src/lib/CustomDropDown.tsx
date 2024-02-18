@@ -16,7 +16,7 @@ interface DropDownItem {
 interface Props {
     trigger: React.ReactNode | string;
     menuItems: DropDownItem[];
-    header?: string;
+    header?: string | React.ReactNode;
 }
 
 export default function CustomDropDown({ trigger, menuItems, header }: Props) {
@@ -34,7 +34,7 @@ export default function CustomDropDown({ trigger, menuItems, header }: Props) {
                 {
                     menuItems.map((item, index) => (
                         item.type === 'dialog' ? <div key={index}>{item.element}</div> :
-                            <DropdownMenuItem key={index} role="button" className="hover:bg-slate-100">{item.element}</DropdownMenuItem>
+                            <DropdownMenuItem key={index} role="button" className="hover:bg-slate-100 hover:cursor-pointer">{item.element}</DropdownMenuItem>
                     ))
                 }
             </DropdownMenuContent>

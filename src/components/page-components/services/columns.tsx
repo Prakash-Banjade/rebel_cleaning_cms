@@ -87,7 +87,7 @@ export const ServicesTableColumns: ColumnDef<Services>[] = [
                                 navigate(`${service.id}/edit`)
                             }} className=" flex items-center gap-x-2">
                                 <span className="text-blue-600 text-base"><FiEdit /></span>
-                                Edit details
+                                Edit
                             </span>
                         },
                         {

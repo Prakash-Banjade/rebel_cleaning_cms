@@ -1,4 +1,5 @@
 import React, { createContext, useContext, ReactNode, useState } from 'react';
+import { jwtDecode } from "jwt-decode";
 
 interface AuthContextProps {
     accessToken: string | null;
@@ -7,6 +8,12 @@ interface AuthContextProps {
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
+interface DecodedAuth {
+    email: string,
+    fullname: string,
+    id: string,
+}
+
 export const useAuth = (): AuthContextProps => {
     const context = useContext(AuthContext);
     if (!context) {
@@ -14,6 +21,13 @@ export const useAuth = (): AuthContextProps => {
     }
     return context;
 };
+
+export const useDecodedAuth = (): DecodedAuth => {
+    const { accessToken } = useAuth();
+    if (!accessToken) throw new Error('No access token found');
+    const decoded: DecodedAuth = jwtDecode(accessToken);
+    return decoded
+}
 
 interface AuthProviderProps {
     children: ReactNode;

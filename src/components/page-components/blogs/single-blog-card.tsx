@@ -30,7 +30,6 @@ export default function BlogCard({ blog }: { blog: Blog }) {
 
             <Link to={blog.id} title="Click to view" className="break-words whitespace-pre-wrap hover:underline font-bold text-gray-700 text-2xl">{blog?.title}</Link>
             <p className="text-gray-700 text-sm mt-2">{blog.author?.name}</p>
-            <div className="line-clamp-2 mt-5" dangerouslySetInnerHTML={{ __html: blog?.content.slice(0, 1000) }} />
 
             <section className="flex justify-end gap-3 mt-auto pt-5">
                 <Button size={'icon'} variant={'outline'} className="text-blue-600 hover:text-blue-500" title="Edit blog" asChild>

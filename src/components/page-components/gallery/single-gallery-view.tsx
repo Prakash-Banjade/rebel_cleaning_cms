@@ -1,20 +1,29 @@
 import { Button } from "@/components/ui/button";
+import { useBreadCrumb } from "@/context/BreadCrumbContext";
 import { CustomAlertDialog } from "@/lib/CustomAlertDialog";
 import MasonryGrid from "@/lib/masonry-grid";
 import { deleteGallery } from "@/lib/queryFns";
 import { Gallery } from "@/models/gallery.model";
 import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 export default function SingleGalleryView({ gallery }: { gallery: Gallery }) {
     const navigate = useNavigate();
+    const { setBreadCrumb } = useBreadCrumb()
 
     const { mutate, isPending } = useMutation({
         mutationFn: () => deleteGallery(gallery.id),
         onSuccess: () => navigate(-1)
     })
+
+    useEffect(() => {
+        if (gallery?.title) {
+            setBreadCrumb(gallery?.title)
+        }
+    }, [gallery])
 
     return (
         <div className="bg-white mt-3 p-8 border rounded-md">

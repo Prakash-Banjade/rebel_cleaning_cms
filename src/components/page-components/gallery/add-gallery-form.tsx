@@ -88,11 +88,6 @@ export default function AddNewGalleryForm() {
                     <Input required id="coverImage" type="file" accept="image/jpeg, image/png, image/webp" multiple onChange={e => e.target.files && form.setValue('images', [...form.getValues('images'), ...e.target.files])} />
                 </div>
 
-                {form.watch('images') && (form.getValues('images')?.length > 0) && <div className="bg-blue-50 flex items-center gap-2 text-sm w-fit rounded-md px-3 py-2 text-blue-500">
-                    <CiCircleInfo />
-                    Click image to remove.
-                </div>}
-
                 <MasonryGrid>
                     {form.watch('images') && (
                         form.getValues('images').map((image, index) => (

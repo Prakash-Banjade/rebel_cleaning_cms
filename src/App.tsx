@@ -22,7 +22,7 @@ import FaqPage from "./pages/cms/faq/faq.index"
 const routes = [
   { path: '/dashboard', element: <h1>Dashboard</h1> },
   { path: '/users', element: <UsersPage /> },
-  { path: '/users/new', element: <h1>Add new user</h1> },
+  { path: '/users/new', element: <h1>Add new user here</h1> },
 
   { path: '/services', element: <ServicesPage /> },
   { path: '/services/new', element: <AddService /> },
@@ -41,7 +41,7 @@ const routes = [
 
   { path: '/contact', element: <ContactPage /> },
   { path: '/contact/form', element: <ContactForm /> },
-  
+
   { path: '/faq', element: <FaqPage /> },
 ]
 

@@ -12,7 +12,7 @@ export interface Blog {
 }
 
 export const blogFormSchema = z.object({
-    title: z.string().min(3).max(100),
+    title: z.string().min(3, { message: 'Too short blog title. Try something else' }).max(100, { message: 'Too large title. Try upto 100 characters.' }),
     content: z.string(),
     coverImage: z.instanceof(File).optional()
 })

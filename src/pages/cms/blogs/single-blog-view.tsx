@@ -1,14 +1,23 @@
+import { useBreadCrumb } from "@/context/BreadCrumbContext"
 import { getBlogById } from "@/lib/queryFns"
 import { useQuery } from "@tanstack/react-query"
+import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 export default function SingleBlogView() {
     const { id } = useParams()
+    const { setBreadCrumb } = useBreadCrumb()
 
     const { data } = useQuery({
         queryKey: ['blog', id],
         queryFn: () => getBlogById(id as string)
     })
+
+    useEffect(() => {
+        if (data?.title) {
+            setBreadCrumb(data?.title)
+        }
+    }, [data])
 
     return (
         <article className="bg-white mt-3 p-8 border rounded-md prose lg:prose-lg min-w-full flex flex-col">

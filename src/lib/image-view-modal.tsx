@@ -17,10 +17,9 @@ export default function ImageViewModal({ src, alt, trigger }: Props) {
             <DialogTrigger asChild>
                 {trigger}
             </DialogTrigger>
-            <DialogContent className="min-w-fit min-h-fit">
+            <DialogContent className="min-w-fit min-h-fit flex justify-center">
                 <img src={src} alt={alt} className="max-w-[80vw] max-h-[90vh] aspect-auto" />
             </DialogContent>
         </Dialog>
-
     )
 }

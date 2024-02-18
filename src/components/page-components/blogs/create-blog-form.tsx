@@ -68,7 +68,7 @@ export default function AddNewBlogForm() {
                         <FormItem>
                             <FormLabel>Blog Title</FormLabel>
                             <FormControl>
-                                <Input placeholder="New blog title" required {...field} />
+                                <Input placeholder="New blog title" {...field} />
                             </FormControl>
                             <FormDescription>
                                 Enter the title for blog.
@@ -79,7 +79,7 @@ export default function AddNewBlogForm() {
                 />
                 <div className="flex flex-col gap-3">
                     <FormLabel htmlFor="coverImage">Cover Image</FormLabel>
-                    <Input required id="coverImage" type="file" accept="image/*" onChange={e => e.target.files && form.setValue('coverImage', e.target.files[0])} />
+                    <Input id="coverImage" type="file" accept="image/*" onChange={e => e.target.files && form.setValue('coverImage', e.target.files[0])} />
                 </div>
 
                 {form.watch('coverImage') && (

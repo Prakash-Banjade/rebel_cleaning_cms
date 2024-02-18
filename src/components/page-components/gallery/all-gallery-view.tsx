@@ -17,10 +17,9 @@ function SingleGalleryCard({ gallery }: { gallery: Gallery }) {
 }
 
 export default function AllGalleryView({ galleries }: { galleries: Gallery[] }) {
-    return (
+    return galleries?.length > 0 ? (
         <MasonryGrid>
             {galleries?.map((gallery) => <SingleGalleryCard key={gallery.id} gallery={gallery} />)}
         </MasonryGrid>
-    )
-
+    ) : <p className="italic text-muted-foreground text-center">** No galleries have been added yet. **</p>
 }
